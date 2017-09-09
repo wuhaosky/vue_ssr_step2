@@ -1,5 +1,5 @@
 <template>
-<div class="app">
+<div class="routerpage3entry">
     <transition name="fade" mode="out-in">
         <!-- 路由出口 -->
         <!-- 路由匹配到的组件将渲染在这里 -->
@@ -11,31 +11,24 @@
 <script>
 
 export default {
-    name: 'app',
+    name: 'routerpage3entry',
     components: {
     },
     data() {
         return {
-
         }
     },
-    props: {
-        data: {}
+    computed: {
     },
     mounted() {
-        this.$store.dispatch('fetchData');
     },
     methods: {
-
-    },
-    computed: {
-
     }
 }
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-.app{
-
+.routerpage3entry{
+    
 }
 </style>
