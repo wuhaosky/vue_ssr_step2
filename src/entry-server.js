@@ -7,10 +7,10 @@ export default context => {
         const { app, router, store } = createApp();
         router.push(context.url);
 
-        // const matchedComponents = router.getMatchedComponents();
-        // if (!matchedComponents.length) {
-        //     return reject({ code: 404 });
-        // }
+        const matchedComponents = router.getMatchedComponents();
+        if (!matchedComponents.length) {
+            resolve({ code: 404 });
+        }
 
         context.state = store.state;
         resolve(app);

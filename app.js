@@ -25,10 +25,17 @@ router.get("*", function*(next) {
     let ctx = this;
     const context = { url: ctx.url };
 
-    createApp(context).then(app => {
+    return createApp(context).then(app => {
+            if (app.code === 404) {
+                ctx.status = 404;
+                ctx.type = 'text';
+                ctx.body = "Page not found";
+                return;
+            } 
             renderer.renderToString(app, (err, html) => {
                 if (err) {
                     ctx.status = 500;
+                    ctx.type = 'html';
                     ctx.body = `
                         <h1>Error: ${err.message}</h1>
                         <pre>${err.stack}</pre>
@@ -36,6 +43,7 @@ router.get("*", function*(next) {
                     return;
                 } else {
                     ctx.status = 200;
+                    ctx.type = 'html';
                     ctx.body = `
                         <!DOCTYPE html>
                         <html lang="zh-CN">
@@ -61,16 +69,14 @@ router.get("*", function*(next) {
                 }
             });
         }).catch(err => {
-            if (err.code === 404) {
-                ctx.status = 404;
-                ctx.body = "Page not found";
-            } else {
-                ctx.status = 500;
-                ctx.body = "Internal Error";
-            }
-            process.exit(1);
+            console.log("err:" + err);
         }
     );
 });
 
 server.listen(3000);
+
+process.on('unhandledRejection', (reason, p) => {
+    console.log("Unhandled Rejection at: Promise ", p, " reason: ", reason);
+    // application specific logging, throwing an error, or other logic here
+});
