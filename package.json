@@ -50,7 +50,7 @@
     "webpack-dev-server": "^2.4.2"
   },
   "scripts": {
-    "start": "node devserver.js",
+    "app": "node app.js",
     "build": "npm run build-client && npm run build-server",
     "build-client": "webpack --config ./build/webpack.client.js",
     "build-server": "webpack --config ./build/webpack.server.js"
