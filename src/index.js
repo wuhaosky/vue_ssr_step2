@@ -10,7 +10,7 @@ import {createRouter} from './router/router.js'
 import {sync} from 'vuex-router-sync'
 
 // 引入样式
-// import './index.less';
+import './index.less';
 
 // 根vue component
 import App from './app.vue'

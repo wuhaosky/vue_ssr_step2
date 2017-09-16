@@ -19,7 +19,7 @@ const renderer = require("vue-server-renderer").createRenderer();
 const createApp = require("./dist/bundle.server.js")["default"];
 
 // Client-Side Bundle File
-const clientBundleFileUrl = '/bundle.client.js';
+const clientBundleFileUrl = './bundle.client.js';
 
 router.get("*", function*(next) {
     let ctx = this;
@@ -56,6 +56,7 @@ router.get("*", function*(next) {
                             <meta name="description" content=""/>
                             <meta name="format-detection" content="telephone=no">
                             <meta name="format-detection" content="email=no"/>
+                            <link rel="stylesheet" type="text/css" href="./main.css" />
                         </head>
                         <body>
                             <div id="app">
@@ -74,7 +75,10 @@ router.get("*", function*(next) {
     );
 });
 
-server.listen(3000);
+var port = 3000;
+server.listen(port, () => {
+    console.log(`server started at localhost:${port}`);
+});
 
 process.on('unhandledRejection', (reason, p) => {
     console.log("Unhandled Rejection at: Promise ", p, " reason: ", reason);
