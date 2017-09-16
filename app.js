@@ -25,7 +25,7 @@ router.get("*", function*(next) {
     let ctx = this;
     const context = { url: ctx.url };
 
-    return createApp(context).then(app => {
+    yield createApp(context).then(app => {
             if (app.code === 404) {
                 ctx.status = 404;
                 ctx.type = 'text';
